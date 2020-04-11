@@ -1,12 +1,9 @@
- const fs = require('fs');
+// const fs = require('fs');
 
- const readData = fs.readFileSync('./src/inputData.json', 'utf8');
- const Jsondata = JSON.parse(readData);
+// const readData = fs.readFileSync('./src/inputData.json', 'utf8');
+// const Jsondata = JSON.parse(readData);
 const returnPeriod = (ImpactData) => {
-    if(ImpactData === ""){
-        ImpactData = Jsondata;
-    }
-  // 
+  // ImpactData = Jsondata;
   if (ImpactData.periodType === 'days') {
     return Math.trunc((ImpactData.timeToElapse * 1) / 3);
   }

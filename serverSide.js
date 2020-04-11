@@ -12,7 +12,7 @@ app.get('/index.html', function (req, res) {
    res.sendFile(__dirname + "/" + "index.html" );
 })
 
-app.get('/covid-19-estimated', (req,res)=>{
+app.get('/api/v1/on-covid-19', (req,res)=>{
     fs.readFile(__dirname + '/' + './src/inputData.json', 'utf8', (err,data)=>{
         console.log(data);
         res.end(data);

@@ -87,13 +87,16 @@ app.post('/api/v1/on-covid-19', urlencodedParser,  (req, res)=> {
 
         app.get('/api/v1/on-covid-19/logs', (req,res,next)=>{ 
        
+            logstimeStamp=[];
+            logsreqPath=[];
+            logstimediff=[];
 
             for (let i=0;i<timeLogs.length; i++){
-               jsonData =  JSON.parse(timeLogs[i])   
+               jsonData =  JSON.parse(timeLogs[i])               
                res.end(jsonData.timeStamp + "\t\t" + jsonData.requestpath + "\t\t" + jsonData.timediff + "\n")         
             }
-            console.log(jsonData)
            
+         
         })
     })
 })

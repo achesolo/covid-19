@@ -1,21 +1,22 @@
-var fs = require('fs');
-var readData = fs.readFileSync('./src/inputData.json', 'utf8');
+const fs = require('fs');
+
+const readData = fs.readFileSync('./src/inputData.json', 'utf8');
 const Jsondata = JSON.parse(readData);
-const returnPeriod = (ImpactData)=>{
+const returnPeriod = (ImpactData) => {
     ImpactData = Jsondata;
-    if(ImpactData.periodType === 'days'){
+    if (ImpactData.periodType === 'days'){
         return Math.trunc((ImpactData.timeToElapse * 1) / 3);
     }
-    if(ImpactData.data.periodType === 'weeks'){
+    if (ImpactData.data.periodType === 'weeks'){
         return Math.trunc((ImpactData.timeToElapse * 7) / 3);
     }
-    if(ImpactData.data.periodType === 'months'){
+    if (ImpactData.data.periodType === 'months'){
         return Math.trunc((ImpactData.timeToElapse * 30) / 3);
     }
     return 0;
 }
 
-const Impact = (data)=>{
+const Impact = (data) => {
     const timeToElapse = data.timeToElapse;
     const avgDailyIncomePopulation = data.region.avgDailyIncomePopulation;
     const avgDailyIncomeInUSD = data.region.avgDailyIncomeInUSD;
@@ -73,7 +74,7 @@ const Impact = (data)=>{
 
 
 exports.covid19ImpactEstimator = (data) => {
-  im= Impact(data);
+ const im = Impact(data);
   estimate = im.estimate;
   return returnData = {
     data,    

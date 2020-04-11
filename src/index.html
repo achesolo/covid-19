@@ -23,7 +23,7 @@
               Covid-19 estimator
             </div>
             <div class="card-body">
-              <form action = "http://127.0.0.1:8081/postData" method = "POST">
+              <form action = "http://127.0.0.1:8081/api/v1/on-covid-19" method = "POST">
                 <div class="form-group">              
                   <label for="">Population</label>
                   <input type="number" name="population" attribute='data-population' class="form-control" id="population" placeholder="Enter population">                  
@@ -48,7 +48,7 @@
                     <option>months</option>
                   </select>             
                 </div>
-                <button type="submit" attribute='data-go-estimate' class="btn btn-primary">Send Data</button>
+                <button type="submit" attribute='data-go-estimate' class="btn btn-primary">Estimate</button>
               </form>
             </div>
           </div>    

@@ -1,31 +1,31 @@
 var fs = require('fs');
-var readData = fs.readFileSync('inputData.json', 'utf8');
+var readData = fs.readFileSync('../inputData.json', 'utf8');
 const Jsondata = JSON.parse(readData);
 const returnPeriod = (ImpactData)=>{
     ImpactData = Jsondata;
-    if(ImpactData.data.periodType === 'days'){
-        return Math.trunc((ImpactData.data.timeToElapse * 1) / 3);
+    if(ImpactData.periodType === 'days'){
+        return Math.trunc((ImpactData.timeToElapse * 1) / 3);
     }
     if(ImpactData.data.periodType === 'weeks'){
-        return Math.trunc((ImpactData.data.timeToElapse * 7) / 3);
+        return Math.trunc((ImpactData.timeToElapse * 7) / 3);
     }
     if(ImpactData.data.periodType === 'months'){
-        return Math.trunc((ImpactData.data.timeToElapse * 30) / 3);
+        return Math.trunc((ImpactData.timeToElapse * 30) / 3);
     }
     return 0;
 }
 
-const Impact = ()=>{
-    const timeToElapse = Jsondata.data.timeToElapse;
-    const avgDailyIncomePopulation = Jsondata.data.region.avgDailyIncomePopulation;
-    const avgDailyIncomeInUSD = Jsondata.data.region.avgDailyIncomeInUSD;
-    const totalHospitalBeds = Jsondata.data.totalHospitalBeds;
+const Impact = (data)=>{
+    const timeToElapse = data.timeToElapse;
+    const avgDailyIncomePopulation = data.region.avgDailyIncomePopulation;
+    const avgDailyIncomeInUSD = data.region.avgDailyIncomeInUSD;
+    const totalHospitalBeds = data.totalHospitalBeds;
 
-    const CurrentlyInfected = Jsondata.data.reportedCases * 10;
-    const CurrentlyInfected_Severe = Jsondata.data.reportedCases * 50;
+    const CurrentlyInfected = data.reportedCases * 10;
+    const CurrentlyInfected_Severe = data.reportedCases * 50;
 
-    const infectionsByRequestedTime = CurrentlyInfected * (2 ** returnPeriod(Jsondata));
-    const infectionsByRequestedTime_Severe = CurrentlyInfected_Severe * (2 ** returnPeriod(Jsondata));
+    const infectionsByRequestedTime = CurrentlyInfected * (2 ** returnPeriod(data));
+    const infectionsByRequestedTime_Severe = CurrentlyInfected_Severe * (2 ** returnPeriod(data));
 
     const severeCasesByRequestedTime = parseInt(0.15 * infectionsByRequestedTime);
     const severeCasesByRequestedTime_Severe = parseInt(0.15 * infectionsByRequestedTime_Severe);
@@ -72,20 +72,19 @@ const Impact = ()=>{
 
 
 
-const covid19ImpactEstimator = (data) => {
-  data = Jsondata.data;
-  im= Impact();
+exports.covid19ImpactEstimator = (data) => {
+  im= Impact(data);
   estimate = im.estimate;
-  returnData = {
+  return returnData = {
     data,    
     estimate   
   }
   
-  console.log(returnData);
+
 }
 
 
-covid19ImpactEstimator();
+//covid19ImpactEstimator();
 
 // //total hospital beds
 // var totalHospitalBeds = data.data.totalHospitalBeds;
@@ -126,4 +125,4 @@ covid19ImpactEstimator();
 
  //console.log(avgDailyIncomeInUSD)
 
-//export default covid19ImpactEstimator;
+//exports.covid19ImpactEstimator;

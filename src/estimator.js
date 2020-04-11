@@ -17,10 +17,10 @@ const returnPeriod = (ImpactData) => {
 };
 
 const Impact = (data) => {
-  const  timeToElapse  = data.timeToElapse;
-  const  avgDailyIncomePopulation  = data.region.avgDailyIncomePopulation;
-  const  avgDailyIncomeInUSD  = data.region.avgDailyIncomeInUSD;
-  const  totalHospitalBeds  = data.totalHospitalBeds;
+  const { timeToElapse } = data;
+  const { avgDailyIncomePopulation } = data.region;
+  const { avgDailyIncomeInUSD } = data.region;
+  const { totalHospitalBeds } = data;
 
   const CurrentlyInfected = data.reportedCases * 10;
   const CurrentlyInfectedSevere = data.reportedCases * 50;
@@ -53,22 +53,22 @@ const Impact = (data) => {
   return {
     estimate: {
       impact: {
-        'currentlyInfectPeople': CurrentlyInfected,
-        'infectionsByRequestedTime':infectionsByRequestedTime,
-        'severeCasesByRequestedTime':severeCasesByRequestedTime,
-        'hospitalBedsByRequestedTime':hospitalBedsByRequestedTime,
-        'casesForICUByRequestedTime':casesForICUByRequestedTime,
-        'casesForVentilatorsByRequestedTime':casesForVentilatorsByRequestedTime,
-        'dollarsInFlightICU':dollarsInFlightICU
+        currentlyInfectPeople: CurrentlyInfected,
+        infectionsByRequestedTime,
+        severeCasesByRequestedTime,
+        hospitalBedsByRequestedTime,
+        casesForICUByRequestedTime,
+        casesForVentilatorsByRequestedTime,
+        dollarsInFlightICU
       },
       severeImpact: {
-        'currentlyInfectPeople': CurrentlyInfectedSevere,
-        'infectionsByRequestedTime': infectionsByRequestedTimeSevere,
-        'severeCasesByRequestedTime': severeCasesByRequestedTimeSevere,
-        'hospitalBedsByRequestedTime': hospitalBedsByRequestedTimeSevere,
-        'casesForICUByRequestedTime': casesForICUByRequestedTimeSevere,
-        'casesForVentilatorsByRequestedTime': casesForVentilatorsByRequestedTimeSevere,
-        'dollarsInFlightICU': dollarsInFlightICUSevere
+        currentlyInfectPeople: CurrentlyInfectedSevere,
+        infectionsByRequestedTime: infectionsByRequestedTimeSevere,
+        severeCasesByRequestedTime: severeCasesByRequestedTimeSevere,
+        hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere,
+        casesForICUByRequestedTime: casesForICUByRequestedTimeSevere,
+        casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeSevere,
+        dollarsInFlightICU: dollarsInFlightICUSevere
       }
     }
   };

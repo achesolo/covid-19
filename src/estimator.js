@@ -1,5 +1,5 @@
 var fs = require('fs');
-var readData = fs.readFileSync('../inputData.json', 'utf8');
+var readData = fs.readFileSync('./src/inputData.json', 'utf8');
 const Jsondata = JSON.parse(readData);
 const returnPeriod = (ImpactData)=>{
     ImpactData = Jsondata;
@@ -79,50 +79,7 @@ exports.covid19ImpactEstimator = (data) => {
     data,    
     estimate   
   }
-  
-
+  //
 }
 
-
-//covid19ImpactEstimator();
-
-// //total hospital beds
-// var totalHospitalBeds = data.data.totalHospitalBeds;
-// var avgDailyIncomeInUSD = data.data.region.avgDailyIncomeInUSD;
-
-//  //output : CurrentlyInfected
-//  var ImpactCurrentlyInfected = data.data.reportedCases * 10;
-//  var SevereCurrentlyInfected = data.data.reportedCases * 50;
-
-//  //output : infectionsByRequestedTime
-//  var ImpactinfectionsByRequestedTime = ImpactCurrentlyInfected * (1024);
-//  var SevereinfectionsByRequestedTime = SevereCurrentlyInfected * (1024);
- 
-//  //output : severeCasesByRequestedTime
-//  var ImpactsevereCasesByRequestedTime = parseInt(0.15 * ImpactinfectionsByRequestedTime);
-//  var SsevereCasesByRequestedTime = parseInt(0.15 * SevereinfectionsByRequestedTime);
-
-//  // output: hospitalBedsByRequestedTime
-//  var severeCovid19PositiveBeds = parseInt(0.35 * totalHospitalBeds);
-//  var ImpacthospitalBedsByRequestedTime = severeCovid19PositiveBeds - ImpactsevereCasesByRequestedTime;
-//  var SeverehospitalBedsByRequestedTime = severeCovid19PositiveBeds - SsevereCasesByRequestedTime;
-
-// //output: casesForICUByRequestedTime
-// var ImpactcasesForICUByRequestedTime = 0.05 * ImpactinfectionsByRequestedTime;
-// var SeverecasesForICUByRequestedTime = 0.05 * SsevereCasesByRequestedTime;
-
-// // output : casesForVentilatorsByRequestedTime
-// var ImpactcasesForVentilatorsByRequestedTime = 0.02 * ImpactinfectionsByRequestedTime; 
-// var SeverecasesForVentilatorsByRequestedTime = 0.02 * SsevereCasesByRequestedTime; 
-
-// //output : dollarsInFlight for 5%
-// var ImpactdollarsInFlightICU = ImpactcasesForICUByRequestedTime * avgDailyIncomeInUSD * 30;
-// var SeveredollarsInFlightICU = SeverecasesForICUByRequestedTime * avgDailyIncomeInUSD * 30;
-
-// //output : dollarsInFlight for 2%
-// var ImpactdollarsInFlightVENT = ImpactcasesForVentilatorsByRequestedTime * avgDailyIncomeInUSD * 30;
-// var SeveredollarsInFlightVENT = SeverecasesForVentilatorsByRequestedTime * avgDailyIncomeInUSD * 30;
-
- //console.log(avgDailyIncomeInUSD)
-
-//exports.covid19ImpactEstimator;
+//export default covid19ImpactEstimator

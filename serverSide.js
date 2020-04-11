@@ -1,4 +1,4 @@
-const estimatorFunc = require('./estimator.js');
+const estimatorFunc = require('./src/estimator');
 var convert = require('xml-js');
 var request = require('request');
 var express = require('express');
@@ -7,13 +7,13 @@ var app = express();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const timeLogs = [];
-//app.use(express.static('public'));
+
 app.get('/index.html', function (req, res) {
-   res.sendFile( __dirname + "/" + "index.html" );
+   res.sendFile(__dirname + "/" + "index.html" );
 })
 
 app.get('/covid-19-estimated', (req,res)=>{
-    fs.readFile(__dirname + '/' + '../inputData.json', 'utf8', (err,data)=>{
+    fs.readFile(__dirname + '/' + './src/inputData.json', 'utf8', (err,data)=>{
         console.log(data);
         res.end(data);
     })
@@ -30,7 +30,7 @@ app.post('/api/v1/on-covid-19', urlencodedParser,  (req, res)=> {
       totalHospitalBeds:req.body.hospital_beds,
       periodType:req.body.period_type
    };
-   fs.readFile(__dirname + '/' + '../inputData.json', 'utf8', (err,data)=>{
+   fs.readFile(__dirname + '/' + './src/inputData.json', 'utf8', (err,data)=>{
     data = JSON.parse( data );
     data.data.population = response.population;
     data.data.region.timeToElapse = response.timeToElapse;
@@ -38,7 +38,7 @@ app.post('/api/v1/on-covid-19', urlencodedParser,  (req, res)=> {
     data.data.totalHospitalBeds = response.totalHospitalBeds;
     data.data.periodType = response.periodType;
     estimator = estimatorFunc.covid19ImpactEstimator(data.data);
-  //  console.log(estimator.data)
+
     res.end(JSON.stringify(estimator));
     let start_time = new Date().getTime();            
             request.get('/api/v1/on-covid-19', function (err, response) {
@@ -86,7 +86,7 @@ app.post('/api/v1/on-covid-19', urlencodedParser,  (req, res)=> {
         });
 
         app.get('/api/v1/on-covid-19/logs', (req,res,next)=>{ 
-          //  jsonData={};
+       
 
             for (let i=0;i<timeLogs.length; i++){
                jsonData =  JSON.parse(timeLogs[i])   

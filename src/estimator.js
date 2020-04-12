@@ -22,34 +22,34 @@ const Impact = (data) => {
   const { avgDailyIncomeInUSD } = data.region;
   const { totalHospitalBeds } = data;
 
-  const currentlyInfected = Math.trunc(data.reportedCases * 10);
-  const currentlyInfectedSevere = Math.trunc(data.reportedCases * 50);
+  const currentlyInfected = Math.floor(data.reportedCases * 10);
+  const currentlyInfectedSevere = Math.floor(data.reportedCases * 50);
 
-  const infectionsByRequestedTime = Math.trunc(currentlyInfected * (2 ** returnPeriod(data)));
-  const infectionsByRequestedTimeSevere = Math.trunc(currentlyInfectedSevere
+  const infectionsByRequestedTime = Math.floor(currentlyInfected * (2 ** returnPeriod(data)));
+  const infectionsByRequestedTimeSevere = Math.floor(currentlyInfectedSevere
      * (2 ** returnPeriod(data)));
 
-  const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
-  const severeCasesByRequestedTimeSevere = Math.trunc(0.15 * infectionsByRequestedTimeSevere);
+  const severeCasesByRequestedTime = Math.floor(0.15 * infectionsByRequestedTime);
+  const severeCasesByRequestedTimeSevere = Math.floor(0.15 * infectionsByRequestedTimeSevere);
 
-  const severeCovid19PositiveBeds = Math.trunc(0.35 * totalHospitalBeds);
-  const severeCovid19PositiveBedsSevere = Math.trunc(0.35 * totalHospitalBeds);
+  const severeCovid19PositiveBeds = Math.floor(0.35 * totalHospitalBeds);
+  const severeCovid19PositiveBedsSevere = Math.floor(0.35 * totalHospitalBeds);
 
-  const hospitalBedsByRequestedTime = Math.trunc(severeCovid19PositiveBeds
+  const hospitalBedsByRequestedTime = Math.floor(severeCovid19PositiveBeds
     - severeCasesByRequestedTime);
-  const hospitalBedsByRequestedTimeSevere = Math.trunc(severeCovid19PositiveBedsSevere
+  const hospitalBedsByRequestedTimeSevere = Math.floor(severeCovid19PositiveBedsSevere
   - severeCasesByRequestedTimeSevere);
 
-  const casesForICUByRequestedTime = Math.trunc(0.05 * infectionsByRequestedTime);
-  const casesForICUByRequestedTimeSevere = Math.trunc(0.05 * infectionsByRequestedTimeSevere);
+  const casesForICUByRequestedTime = Math.floor(0.05 * infectionsByRequestedTime);
+  const casesForICUByRequestedTimeSevere = Math.floor(0.05 * infectionsByRequestedTimeSevere);
 
-  const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
-  const casesForVentilatorsByRequestedTimeSevere = Math.trunc(0.02
+  const casesForVentilatorsByRequestedTime = Math.floor(0.02 * infectionsByRequestedTime);
+  const casesForVentilatorsByRequestedTimeSevere = Math.floor(0.02
     * infectionsByRequestedTimeSevere);
 
-  const dollarsInFlight = Math.trunc(infectionsByRequestedTime * avgDailyIncomePopulation
+  const dollarsInFlight = Math.floor(infectionsByRequestedTime * avgDailyIncomePopulation
    * avgDailyIncomeInUSD * returnPeriod(data));
-  const dollarsInFlightICUSevere = Math.trunc(infectionsByRequestedTimeSevere
+  const dollarsInFlightICUSevere = Math.floor(infectionsByRequestedTimeSevere
    * avgDailyIncomePopulation * avgDailyIncomeInUSD * returnPeriod(data));
 
 

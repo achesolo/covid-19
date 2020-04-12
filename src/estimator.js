@@ -5,13 +5,13 @@
 const returnPeriod = (ImpactData) => {
   // ImpactData = Jsondata;
   if (ImpactData.periodType === 'days') {
-    return Math.trunc((ImpactData.timeToElapse * 1));
+    return Math.trunc((ImpactData.timeToElapse * 1) / 3);
   }
   if (ImpactData.periodType === 'weeks') {
-    return Math.trunc((ImpactData.timeToElapse * 7));
+    return Math.trunc((ImpactData.timeToElapse * 7) / 3);
   }
   if (ImpactData.periodType === 'months') {
-    return Math.trunc((ImpactData.timeToElapse * 30));
+    return Math.trunc((ImpactData.timeToElapse * 30) / 3);
   }
   return 0;
 };

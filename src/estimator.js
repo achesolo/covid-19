@@ -49,10 +49,7 @@ const Impact = (data) => {
   const dollarsInFlightICUSevere = infectionsByRequestedTimeSevere
    * avgDailyIncomePopulation * avgDailyIncomeInUSD * timeToElapse;
 
-
-  return {
-    estimate: {
-      impact: {
+   const impact = {
         currentlyInfectPeople: CurrentlyInfected,
         infectionsByRequestedTime,
         severeCasesByRequestedTime,
@@ -60,8 +57,9 @@ const Impact = (data) => {
         casesForICUByRequestedTime,
         casesForVentilatorsByRequestedTime,
         dollarsInFlightICU
-      },
-      severeImpact: {
+      };
+
+      const severeImpact = {
         currentlyInfectPeople: CurrentlyInfectedSevere,
         infectionsByRequestedTime: infectionsByRequestedTimeSevere,
         severeCasesByRequestedTime: severeCasesByRequestedTimeSevere,
@@ -70,18 +68,29 @@ const Impact = (data) => {
         casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeSevere,
         dollarsInFlightICU: dollarsInFlightICUSevere
       }
-    }
-  };
-};
+
+
+
+
+
+  return { data, impact, severeImpact}
+  
+}  
 
 
 exports.covid19ImpactEstimator = (data) => {
-  const im = Impact(data);
-  const { estimate } = im;
-  return {
-    data,
-    estimate
-  };
+    
+  const estimator = Impact(data);
+    return estimator({
+        data,
+        impact: {},
+        severeImpact: {}
+    })
+//   const { estimate } = im;
+//   return {
+//     data,
+//     estimate
+//   };
   //
 };
 

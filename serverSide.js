@@ -32,10 +32,10 @@ app.post('/api/v1/on-covid-19', urlencodedParser,  (req, res)=> {
    };
    fs.readFile(__dirname + '/' + './src/inputData.json', 'utf8', (err,data)=>{
     data = JSON.parse( data );
-    data.data.population =parseInt(Math.trunc(response.population));
-    data.data.timeToElapse = parseInt(Math.trunc(response.timeToElapse));
-    data.data.reportedCases = parseInt(Math.trunc(response.reportedCases));
-    data.data.totalHospitalBeds = parseInt(Math.trunc(response.totalHospitalBeds));
+    data.data.population =Math.trunc(response.population);
+    data.data.timeToElapse = Math.trunc(response.timeToElapse);
+    data.data.reportedCases = Math.trunc(response.reportedCases);
+    data.data.totalHospitalBeds = Math.trunc(response.totalHospitalBeds);
     data.data.periodType = response.periodType;
     estimator = covid19Estimator(data.data);
 

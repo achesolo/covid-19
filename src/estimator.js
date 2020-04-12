@@ -26,7 +26,8 @@ const Impact = (data) => {
   const currentlyInfectedSevere = Math.trunc(data.reportedCases * 50);
 
   const infectionsByRequestedTime = Math.trunc(currentlyInfected * (2 ** returnPeriod(data)));
-  const infectionsByRequestedTimeSevere = Math.trunc(currentlyInfectedSevere * (2 ** returnPeriod(data)));
+  const infectionsByRequestedTimeSevere = Math.trunc(currentlyInfectedSevere
+     * (2 ** returnPeriod(data)));
 
   const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
   const severeCasesByRequestedTimeSevere = Math.trunc(0.15 * infectionsByRequestedTimeSevere);

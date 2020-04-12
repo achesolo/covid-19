@@ -1,4 +1,4 @@
-const covid19Estimator  = require('./src/estimator');
+const estimatorFunc = require('./src/estimator');
 var convert = require('xml-js');
 var request = require('request');
 var express = require('express');
@@ -32,12 +32,12 @@ app.post('/api/v1/on-covid-19', urlencodedParser,  (req, res)=> {
    };
    fs.readFile(__dirname + '/' + './src/inputData.json', 'utf8', (err,data)=>{
     data = JSON.parse( data );
-    data.data.population =parseInt(Math.trunc(response.population));
-    data.data.timeToElapse = parseInt(Math.trunc(response.timeToElapse));
-    data.data.reportedCases = parseInt(Math.trunc(response.reportedCases));
-    data.data.totalHospitalBeds = parseInt(Math.trunc(response.totalHospitalBeds));
+    data.data.population = response.population;
+    data.data.region.timeToElapse = response.timeToElapse;
+    data.data.reportedCases = response.reportedCases;
+    data.data.totalHospitalBeds = response.totalHospitalBeds;
     data.data.periodType = response.periodType;
-    estimator = covid19Estimator(data.data);
+    estimator = estimatorFunc.covid19ImpactEstimator(data.data);
 
     res.end(JSON.stringify(estimator));
     let start_time = new Date().getTime();            
@@ -107,4 +107,3 @@ var server = app.listen(8081, function () {
    var port = server.address().port
    console.log('app listening on ',port);
 })
-

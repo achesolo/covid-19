@@ -22,11 +22,11 @@ const Impact = (data) => {
   const { avgDailyIncomeInUSD } = data.region;
   const { totalHospitalBeds } = data;
 
-  const currentlyInfected = data.reportedCases * 10;
-  const currentlyInfectedSevere = data.reportedCases * 50;
+  const currentlyInfected = Math.trunc(data.reportedCases * 10);
+  const currentlyInfectedSevere = Math.trunc(data.reportedCases * 50);
 
-  const infectionsByRequestedTime = currentlyInfected * (2 ** returnPeriod(data));
-  const infectionsByRequestedTimeSevere = currentlyInfectedSevere * (2 ** returnPeriod(data));
+  const infectionsByRequestedTime = Math.trunc(currentlyInfected * (2 ** returnPeriod(data)));
+  const infectionsByRequestedTimeSevere = Math.trunc(currentlyInfectedSevere * (2 ** returnPeriod(data)));
 
   const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
   const severeCasesByRequestedTimeSevere = Math.trunc(0.15 * infectionsByRequestedTimeSevere);

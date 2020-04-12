@@ -1,4 +1,4 @@
-const estimatorFunc = require('./src/estimator');
+const covid19Estimator  = require('./src/estimator');
 var convert = require('xml-js');
 var request = require('request');
 var express = require('express');
@@ -37,7 +37,7 @@ app.post('/api/v1/on-covid-19', urlencodedParser,  (req, res)=> {
     data.data.reportedCases = parseInt(Math.trunc(response.reportedCases));
     data.data.totalHospitalBeds = parseInt(Math.trunc(response.totalHospitalBeds));
     data.data.periodType = response.periodType;
-    estimator = estimatorFunc.covid19ImpactEstimator(data.data);
+    estimator = covid19Estimator(data.data);
 
     res.end(JSON.stringify(estimator));
     let start_time = new Date().getTime();            

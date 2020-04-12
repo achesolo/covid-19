@@ -28,11 +28,11 @@ const Impact = (data) => {
   const infectionsByRequestedTime = currentlyInfected * (2 ** returnPeriod(data));
   const infectionsByRequestedTimeSevere = currentlyInfectedSevere * (2 ** returnPeriod(data));
 
-  const severeCasesByRequestedTime = parseInt(0.15 * infectionsByRequestedTime, 10);
-  const severeCasesByRequestedTimeSevere = parseInt(0.15 * infectionsByRequestedTimeSevere, 10);
+  const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
+  const severeCasesByRequestedTimeSevere = Math.trunc(0.15 * infectionsByRequestedTimeSevere);
 
-  const severeCovid19PositiveBeds = parseInt(0.35 * totalHospitalBeds, 10);
-  const severeCovid19PositiveBedsSevere = parseInt(0.35 * totalHospitalBeds, 10);
+  const severeCovid19PositiveBeds = Math.trunc(0.35 * totalHospitalBeds);
+  const severeCovid19PositiveBedsSevere = Math.trunc(0.35 * totalHospitalBeds);
 
   const hospitalBedsByRequestedTime = Math.trunc(severeCovid19PositiveBeds - severeCasesByRequestedTime);
   const hospitalBedsByRequestedTimeSevere = Math.trunc(severeCovid19PositiveBedsSevere
@@ -44,10 +44,10 @@ const Impact = (data) => {
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
   const casesForVentilatorsByRequestedTimeSevere = Math.trunc(0.02 * infectionsByRequestedTimeSevere);
 
-  const dollarsInFlight = infectionsByRequestedTime * avgDailyIncomePopulation
-   * avgDailyIncomeInUSD * timeToElapse;
-  const dollarsInFlightICUSevere = infectionsByRequestedTimeSevere
-   * avgDailyIncomePopulation * avgDailyIncomeInUSD * timeToElapse;
+  const dollarsInFlight = Math.trunc(infectionsByRequestedTime * avgDailyIncomePopulation
+   * avgDailyIncomeInUSD * timeToElapse);
+  const dollarsInFlightICUSevere = Math.trunc(infectionsByRequestedTimeSevere
+   * avgDailyIncomePopulation * avgDailyIncomeInUSD * timeToElapse);
 
 
   return {
@@ -85,7 +85,7 @@ const covid19ImpactEstimator = (data) => {
   const { severeImpact } = estimate;
 
   
-  
+
   return {
     data,
     impact,

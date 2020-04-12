@@ -22,11 +22,11 @@ const Impact = (data) => {
   const { avgDailyIncomeInUSD } = data.region;
   const { totalHospitalBeds } = data;
 
-  const CurrentlyInfected = data.reportedCases * 10;
-  const CurrentlyInfectedSevere = data.reportedCases * 50;
+  const currentlyInfected = data.reportedCases * 10;
+  const currentlyInfectedSevere = data.reportedCases * 50;
 
-  const infectionsByRequestedTime = CurrentlyInfected * (2 ** returnPeriod(data));
-  const infectionsByRequestedTimeSevere = CurrentlyInfectedSevere * (2 ** returnPeriod(data));
+  const infectionsByRequestedTime = currentlyInfected * (2 ** returnPeriod(data));
+  const infectionsByRequestedTimeSevere = currentlyInfectedSevere * (2 ** returnPeriod(data));
 
   const severeCasesByRequestedTime = parseInt(0.15 * infectionsByRequestedTime, 10);
   const severeCasesByRequestedTimeSevere = parseInt(0.15 * infectionsByRequestedTimeSevere, 10);
@@ -53,16 +53,19 @@ const Impact = (data) => {
   return {
     estimate: {
       impact: {
-        currentlyInfectPeople: CurrentlyInfected,
+          //ch-1
+        currentlyInfected,
         infectionsByRequestedTime,
+        //ch-2
         severeCasesByRequestedTime,
         hospitalBedsByRequestedTime,
+        //ch-3
         casesForICUByRequestedTime,
         casesForVentilatorsByRequestedTime,
         dollarsInFlightICU
       },
       severeImpact: {
-        currentlyInfectPeople: CurrentlyInfectedSevere,
+        currentlyInfectPeople: currentlyInfectedSevere,
         infectionsByRequestedTime: infectionsByRequestedTimeSevere,
         severeCasesByRequestedTime: severeCasesByRequestedTimeSevere,
         hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere,

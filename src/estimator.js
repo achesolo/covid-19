@@ -53,13 +53,13 @@ const Impact = (data) => {
   return {
     estimate: {
       impact: {
-          //ch-1
+        // ch-1
         currentlyInfected,
         infectionsByRequestedTime,
-        //ch-2
+        // ch-2
         severeCasesByRequestedTime,
         hospitalBedsByRequestedTime,
-        //ch-3
+        // ch-3
         casesForICUByRequestedTime,
         casesForVentilatorsByRequestedTime,
         dollarsInFlightICU

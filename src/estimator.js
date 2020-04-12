@@ -49,43 +49,38 @@ const Impact = (data) => {
   const dollarsInFlightICUSevere = infectionsByRequestedTimeSevere
    * avgDailyIncomePopulation * avgDailyIncomeInUSD * timeToElapse;
 
-   const impact = {
-        currentlyInfectPeople: CurrentlyInfected,
-        infectionsByRequestedTime,
-        severeCasesByRequestedTime,
-        hospitalBedsByRequestedTime,
-        casesForICUByRequestedTime,
-        casesForVentilatorsByRequestedTime,
-        dollarsInFlightICU
-      };
+  const impact = {
+    currentlyInfectPeople: CurrentlyInfected,
+    infectionsByRequestedTime,
+    severeCasesByRequestedTime,
+    hospitalBedsByRequestedTime,
+    casesForICUByRequestedTime,
+    casesForVentilatorsByRequestedTime,
+    dollarsInFlightICU
+  };
 
-      const severeImpact = {
-        currentlyInfectPeople: CurrentlyInfectedSevere,
-        infectionsByRequestedTime: infectionsByRequestedTimeSevere,
-        severeCasesByRequestedTime: severeCasesByRequestedTimeSevere,
-        hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere,
-        casesForICUByRequestedTime: casesForICUByRequestedTimeSevere,
-        casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeSevere,
-        dollarsInFlightICU: dollarsInFlightICUSevere
-      }
-
-
+  const severeImpact = {
+    currentlyInfectPeople: CurrentlyInfectedSevere,
+    infectionsByRequestedTime: infectionsByRequestedTimeSevere,
+    severeCasesByRequestedTime: severeCasesByRequestedTimeSevere,
+    hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere,
+    casesForICUByRequestedTime: casesForICUByRequestedTimeSevere,
+    casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeSevere,
+    dollarsInFlightICU: dollarsInFlightICUSevere
+  };
 
 
-
-  return { data, impact, severeImpact}
-  
-}  
+  return { data, impact, severeImpact };
+};
 
 
 exports.covid19ImpactEstimator = (data) => {
-    
   const estimator = Impact(data);
-    return estimator({
-        data,
-        impact: {},
-        severeImpact: {}
-    })
+  return estimator({
+    data,
+    impact: {},
+    severeImpact: {}
+  });
 //   const { estimate } = im;
 //   return {
 //     data,

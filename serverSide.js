@@ -4,6 +4,7 @@ const covid19Estimator = require('./src/estimator');
 const convert = require('xml-js');
 const request = require('request');
 const express = require('express');
+var router = express.Router();
 const fs = require('fs');
 
 const app = express();
@@ -54,7 +55,7 @@ app.post('/api/v1/on-covid-19', urlencodedParser, (req, res) => {
       timeLogs.push(covidLogs);
     });
 
-    app.get('/api/v1/on-covid-19/json', (req, res) => {
+    router.get('/api/v1/on-covid-19/json', (req, res) => {
       res.end(JSON.stringify(estimator));
       // const startTime = new Date().getTime();
       request.get('/api/v1/on-covid-19/json', (err, response) => {
@@ -68,7 +69,7 @@ app.post('/api/v1/on-covid-19', urlencodedParser, (req, res) => {
       });
     });
 
-    app.get('/api/v1/on-covid-19/xml', (req, res) => {
+    router.get('/api/v1/on-covid-19/xml', (req, res) => {
       const options = { compact: true, ignoreComment: true, spaces: 4 };
       const result = convert.json2xml(estimator, options);
       res.end(result);
@@ -85,7 +86,7 @@ app.post('/api/v1/on-covid-19', urlencodedParser, (req, res) => {
       });
     });
 
-    app.get('/api/v1/on-covid-19/logs', (req, res, next) => {
+    router.get('/api/v1/on-covid-19/logs', (req, res, next) => {
       logstimeStamp = [];
       logsreqPath = [];
       logstimediff = [];

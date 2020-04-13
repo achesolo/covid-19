@@ -60,10 +60,10 @@ const Impact = (data) => {
   const casesForVentilatorsByRequestedTimeSevere = Math.trunc(0.02
     * infectionsByRequestedTimeSevere);
 
-  const dollarsInFlight = Math.trunc((infectionsByRequestedTime * avgDailyIncomePopulation)
-   * avgDailyIncomeInUSD) / periodInDays(data);
-  const dollarsInFlightICUSevere = Math.trunc((infectionsByRequestedTimeSevere
-   * avgDailyIncomePopulation) * avgDailyIncomeInUSD) / periodInDays(data);
+  const dollarsInFlight = Math.trunc(((infectionsByRequestedTime * avgDailyIncomePopulation)
+   * avgDailyIncomeInUSD) / periodInDays(data));
+  const dollarsInFlightICUSevere = Math.trunc(((infectionsByRequestedTimeSevere
+   * avgDailyIncomePopulation) * avgDailyIncomeInUSD) / periodInDays(data));
 
 
   return {

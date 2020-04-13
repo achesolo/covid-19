@@ -48,9 +48,9 @@ const Impact = (data) => {
     * infectionsByRequestedTimeSevere);
 
   const dollarsInFlight = Math.trunc(infectionsByRequestedTime * avgDailyIncomePopulation
-   * avgDailyIncomeInUSD * returnPeriod(data));
+   * avgDailyIncomeInUSD / returnPeriod(data));
   const dollarsInFlightICUSevere = Math.trunc(infectionsByRequestedTimeSevere
-   * avgDailyIncomePopulation * avgDailyIncomeInUSD * returnPeriod(data));
+   * avgDailyIncomePopulation * avgDailyIncomeInUSD / returnPeriod(data));
 
 
   return {

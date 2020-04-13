@@ -55,7 +55,7 @@ app.post('/api/v1/on-covid-19', urlencodedParser, (req, res) => {
       timeLogs.push(covidLogs);
     });
 
-    router.get('/api/v1/on-covid-19/json', (req, res) => {
+    app.get('/api/v1/on-covid-19/json', (req, res) => {
       res.end(JSON.stringify(estimator));
       // const startTime = new Date().getTime();
       request.get('/api/v1/on-covid-19/json', (err, response) => {

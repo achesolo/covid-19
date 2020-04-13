@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
 const covid19Estimator = require('./src/estimator');
 const convert = require('xml-js');
 const request = require('request');
@@ -24,27 +26,29 @@ app.get('/api/v1/on-covid-19', (req, res) => {
 //
 
 app.post('/api/v1/on-covid-19', urlencodedParser, (req, res) => {
-  response = {
+  const response = {
     population: req.body.population,
     timeToElapse: req.body.time_to_elapse,
     reportedCases: req.body.reported_cases,
     totalHospitalBeds: req.body.hospital_beds,
+    // eslint-disable-next-line linebreak-style
     periodType: req.body.period_type
   };
   fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {
+    // eslint-disable-next-line no-param-reassign
     data = JSON.parse(data);
     data.data.population = Math.trunc(response.population);
     data.data.timeToElapse = Math.trunc(response.timeToElapse);
     data.data.reportedCases = Math.trunc(response.reportedCases);
     data.data.totalHospitalBeds = Math.trunc(response.totalHospitalBeds);
     data.data.periodType = response.periodType;
-    estimator = covid19Estimator(data.data);
+    const estimator = covid19Estimator(data.data);
 
     res.end(JSON.stringify(estimator));
-    const start_time = new Date().getTime();
+    const startTime = new Date().getTime();
     request.get('/api/v1/on-covid-19', (err, response) => {
-      reqTime = new Date().getTime() - start_time;
-      covidLogs = JSON.stringify({
+      const reqTime = new Date().getTime() - startTime;
+      const covidLogs = JSON.stringify({
         timeStamp: Date.now(),
         requestpath: 'on-covid-19',
         timediff: `done in ${reqTime} seconds`
@@ -54,9 +58,9 @@ app.post('/api/v1/on-covid-19', urlencodedParser, (req, res) => {
 
     app.get('/api/v1/on-covid-19/json', (req, res) => {
       res.end(JSON.stringify(estimator));
-      const start_time = new Date().getTime();
+      // const startTime = new Date().getTime();
       request.get('/api/v1/on-covid-19/json', (err, response) => {
-        reqTime = new Date().getTime() - start_time;
+        reqTime = new Date().getTime() - startTime;
         jsonLogs = JSON.stringify({
           timeStamp: Date.now(),
           requestpath: 'on-covid-19/json',

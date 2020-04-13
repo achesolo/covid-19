@@ -9,10 +9,12 @@
 //   const data = req.body;
 //   res.json(covid19Estimator(data));
 // });
-const covidRouters = require('./router')
+
 const app = require('express');
+const covidRouters = require('./router');
 
 
 app.use('/api/v1/on-covid-19', covidRouters);
 
 module.exports = app;
+

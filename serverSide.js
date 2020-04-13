@@ -31,11 +31,9 @@ app.post('/api/v1/on-covid-19', urlencodedParser, (req, res) => {
     timeToElapse: req.body.time_to_elapse,
     reportedCases: req.body.reported_cases,
     totalHospitalBeds: req.body.hospital_beds,
-    // eslint-disable-next-line linebreak-style
     periodType: req.body.period_type
   };
   fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {
-    // eslint-disable-next-line no-param-reassign
     data = JSON.parse(data);
     data.data.population = Math.trunc(response.population);
     data.data.timeToElapse = Math.trunc(response.timeToElapse);
@@ -102,7 +100,7 @@ app.post('/api/v1/on-covid-19', urlencodedParser, (req, res) => {
 
 
 const server = app.listen(8081, () => {
-//  const host = server.address().address;
+  const host = server.address().address;
   const { port } = server.address();
-  // console.log('app listening on ', port);
+   console.log('app listening on ', port);
 });

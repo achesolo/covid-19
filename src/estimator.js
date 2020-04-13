@@ -16,8 +16,21 @@ const returnPeriod = (ImpactData) => {
   return 0;
 };
 
+const periodInDays = (ImpactData) => {
+  if (ImpactData.periodType === 'days') {
+    return Math.trunc((ImpactData.timeToElapse * 1));
+  }
+  if (ImpactData.periodType === 'weeks') {
+    return Math.trunc((ImpactData.timeToElapse * 7));
+  }
+  if (ImpactData.periodType === 'months') {
+    return Math.trunc((ImpactData.timeToElapse * 30));
+  }
+  return 0;
+};
+
 const Impact = (data) => {
-  const { timeToElapse } = data;
+// const { timeToElapse } = data;
   const { avgDailyIncomePopulation } = data.region;
   const { avgDailyIncomeInUSD } = data.region;
   const { totalHospitalBeds } = data;
@@ -48,9 +61,9 @@ const Impact = (data) => {
     * infectionsByRequestedTimeSevere);
 
   const dollarsInFlight = Math.trunc((infectionsByRequestedTime * avgDailyIncomePopulation)
-   * avgDailyIncomeInUSD) / timeToElapse;
+   * avgDailyIncomeInUSD) / periodInDays(data);
   const dollarsInFlightICUSevere = Math.trunc((infectionsByRequestedTimeSevere
-   * avgDailyIncomePopulation) * avgDailyIncomeInUSD) / timeToElapse;
+   * avgDailyIncomePopulation) * avgDailyIncomeInUSD) / periodInDays(data);
 
 
   return {

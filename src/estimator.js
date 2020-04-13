@@ -17,7 +17,7 @@ const returnPeriod = (ImpactData) => {
 };
 
 const Impact = (data) => {
-//  const { timeToElapse } = data;
+  const { timeToElapse } = data;
   const { avgDailyIncomePopulation } = data.region;
   const { avgDailyIncomeInUSD } = data.region;
   const { totalHospitalBeds } = data;
@@ -48,9 +48,9 @@ const Impact = (data) => {
     * infectionsByRequestedTimeSevere);
 
   const dollarsInFlight = Math.trunc((infectionsByRequestedTime * avgDailyIncomePopulation)
-   * avgDailyIncomeInUSD) * returnPeriod(data);
+   * avgDailyIncomeInUSD) / timeToElapse;
   const dollarsInFlightICUSevere = Math.trunc((infectionsByRequestedTimeSevere
-   * avgDailyIncomePopulation) * avgDailyIncomeInUSD) * returnPeriod(data);
+   * avgDailyIncomePopulation) * avgDailyIncomeInUSD) / timeToElapse;
 
 
   return {

@@ -46,29 +46,29 @@
               <form action = "http://127.0.0.1:8081/api/v1/on-covid-19" method = "POST">
                 <div class="form-group">              
                   <label for="population">Population</label>
-                  <input Required type="number" height="50px" width="100px"  name="population" attribute='data-population' class="form-control" id="population" placeholder="Enter population">                  
+                  <input Required type="number" height="50px" width="100px"  name="population" data-population='population' class="form-control" id="population" placeholder="Enter population">                  
                 </div>
                 <div class="form-group">              
                   <label for="time_to_elapse">Time to Elapse</label>
-                  <input Required type="number"  height="50px" width="100px"  name="time_to_elapse" attribute='data-time_to_elapse' class="form-control" id="time_to_elapse" placeholder="Enter time to elapse">                  
+                  <input Required type="number"  height="50px" width="100px"  name="time_to_elapse" data-time-to-elapse='timeToElapse' class="form-control" id="time_to_elapse" placeholder="Enter time to elapse">                  
                 </div> 
                 <div class="form-group">              
                   <label for="reported_cases">Reported Cases</label>
-                  <input Required type="number"  height="50px" width="100px"  name="reported_cases" attribute='data-reported_cases' class="form-control" id="reported_cases" placeholder="Enter reported Cases">                  
+                  <input Required type="number"  height="50px" width="100px"  name="reported_cases" data-reported-cases='reportedCases' class="form-control" id="reported_cases" placeholder="Enter reported Cases">                  
                 </div>
                 <div class="form-group">              
                   <label for="hospital_beds">Hospital Beds</label>
-                  <input Required type="number" height="50px" width="100px"  name="hospital_beds" attribute='data-hospital_beds' class="form-control" id="hospital_beds" placeholder="Enter hospital beds">                  
+                  <input Required type="number" height="50px" width="100px"  name="hospital_beds" data-total-hospital-beds='totalHospitalBeds' class="form-control" id="hospital_beds" placeholder="Enter hospital beds">                  
                 </div>
                 <div class="form-group">              
                   <label for="period_type">Period Type</label>
-                  <select attribute='data-period_type' height="50px" width="100px" name="period_type" class="form-control" id="period_type" placeholder="Enter period type">
+                  <select data-period-type='periodType' height="50px" width="100px" name="period_type" class="form-control" id="period_type" placeholder="Enter period type">
                     <option>days</option>
                     <option>weeks</option>
                     <option>months</option>
                   </select>             
                 </div>
-                <button type="submit" width="154px" size="60x60" height="60px" attribute='data-go-estimate' class="">Estimate</button>
+                <button type="submit" width="154px" size="60x60" height="60px" data-go-estimate class="">Estimate</button>
               </form>
             </div>
           </div>    

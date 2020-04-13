@@ -22,34 +22,34 @@ const Impact = (data) => {
   const { avgDailyIncomeInUSD } = data.region;
   const { totalHospitalBeds } = data;
 
-  const currentlyInfected = Math.truc(data.reportedCases * 10);
-  const currentlyInfectedSevere = Math.truc(data.reportedCases * 50);
+  const currentlyInfected = Math.trunc(data.reportedCases * 10);
+  const currentlyInfectedSevere = Math.trunc(data.reportedCases * 50);
 
-  const infectionsByRequestedTime = Math.truc(currentlyInfected * (2 ** returnPeriod(data)));
+  const infectionsByRequestedTime = Math.trunc(currentlyInfected * (2 ** returnPeriod(data)));
   const infectionsByRequestedTimeSevere = Math.truc(currentlyInfectedSevere
      * (2 ** returnPeriod(data)));
 
-  const severeCasesByRequestedTime = Math.truc(0.15 * infectionsByRequestedTime);
+  const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
   const severeCasesByRequestedTimeSevere = Math.truc(0.15 * infectionsByRequestedTimeSevere);
 
-  const severeCovid19PositiveBeds = Math.truc(0.35 * totalHospitalBeds);
+  const severeCovid19PositiveBeds = Math.trunc(0.35 * totalHospitalBeds);
   const severeCovid19PositiveBedsSevere = Math.truc(0.35 * totalHospitalBeds);
 
-  const hospitalBedsByRequestedTime = Math.truc(severeCovid19PositiveBeds
+  const hospitalBedsByRequestedTime = Math.trunc(severeCovid19PositiveBeds
     - severeCasesByRequestedTime) + 1;
-  const hospitalBedsByRequestedTimeSevere = Math.truc(severeCovid19PositiveBedsSevere
+  const hospitalBedsByRequestedTimeSevere = Math.trunc(severeCovid19PositiveBedsSevere
   - severeCasesByRequestedTimeSevere) + 1;
 
-  const casesForICUByRequestedTime = Math.truc(0.05 * infectionsByRequestedTime);
-  const casesForICUByRequestedTimeSevere = Math.truc(0.05 * infectionsByRequestedTimeSevere);
+  const casesForICUByRequestedTime = Math.trunc(0.05 * infectionsByRequestedTime);
+  const casesForICUByRequestedTimeSevere = Math.trunc(0.05 * infectionsByRequestedTimeSevere);
 
-  const casesForVentilatorsByRequestedTime = Math.truc(0.02 * infectionsByRequestedTime);
-  const casesForVentilatorsByRequestedTimeSevere = Math.truc(0.02
+  const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
+  const casesForVentilatorsByRequestedTimeSevere = Math.trunc(0.02
     * infectionsByRequestedTimeSevere);
 
-  const dollarsInFlight = Math.truc(infectionsByRequestedTime * avgDailyIncomePopulation
+  const dollarsInFlight = Math.trunc(infectionsByRequestedTime * avgDailyIncomePopulation
    * avgDailyIncomeInUSD * returnPeriod(data));
-  const dollarsInFlightICUSevere = Math.truc(infectionsByRequestedTimeSevere
+  const dollarsInFlightICUSevere = Math.trunc(infectionsByRequestedTimeSevere
    * avgDailyIncomePopulation * avgDailyIncomeInUSD * returnPeriod(data));
 
 

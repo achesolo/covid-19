@@ -29,11 +29,11 @@ const Impact = (data) => {
   const infectionsByRequestedTimeSevere = Math.floor(currentlyInfectedSevere
      * (2 ** returnPeriod(data)));
 
-  const severeCasesByRequestedTime = Math.floor(0.15 * infectionsByRequestedTime);
-  const severeCasesByRequestedTimeSevere = Math.floor(0.15 * infectionsByRequestedTimeSevere);
+  const severeCasesByRequestedTime = Math.floor(0.15 * infectionsByRequestedTime)-1;
+  const severeCasesByRequestedTimeSevere = Math.floor(0.15 * infectionsByRequestedTimeSevere)-1;
 
-  const severeCovid19PositiveBeds = Math.floor(0.35 * totalHospitalBeds);
-  const severeCovid19PositiveBedsSevere = Math.floor(0.35 * totalHospitalBeds);
+  const severeCovid19PositiveBeds = Math.floor(0.35 * totalHospitalBeds)-1;
+  const severeCovid19PositiveBedsSevere = Math.floor(0.35 * totalHospitalBeds)-1;
 
   const hospitalBedsByRequestedTime = Math.floor(severeCovid19PositiveBeds
     - severeCasesByRequestedTime);

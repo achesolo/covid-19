@@ -33,7 +33,7 @@ const Impact = (data) => {
   const severeCasesByRequestedTimeSevere = Math.truc(0.15 * infectionsByRequestedTimeSevere);
 
   const severeCovid19PositiveBeds = Math.trunc(0.35 * totalHospitalBeds);
-  const severeCovid19PositiveBedsSevere = Math.truc(0.35 * totalHospitalBeds);
+  const severeCovid19PositiveBedsSevere = Math.trunc(0.35 * totalHospitalBeds);
 
   const hospitalBedsByRequestedTime = Math.trunc(severeCovid19PositiveBeds
     - severeCasesByRequestedTime) + 1;

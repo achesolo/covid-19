@@ -6,7 +6,7 @@ const fs = require('fs');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const router = app.Router();
 // middleware that is specific to this router
-router.use('/logs', (req, res, next) => {
+router.get('/logs', (req, res, next) => {
   const startTime = new Date().getTime();
   const reqTime = new Date().getTime() - startTime;
 

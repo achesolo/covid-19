@@ -90,9 +90,7 @@ router.post('/', urlencodedParser, (req, res) => {
 // });
 
 // define the about route
-router.post('/', urlencodedParser, (req, res) => {
-  res.end(covidEstimator(req.body.data));
-});
+
 router.post('/json', urlencodedParser, (req, res) => {
   res.json(covidEstimator(req.body.data));
 });

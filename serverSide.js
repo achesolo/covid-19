@@ -106,4 +106,4 @@ const server = app.listen(8081, () => {
    console.log('app listening on ', port);
 });
 
-export default app;
+module.exports = app;

@@ -18,6 +18,7 @@ router.use('/logs', (req, res, next) => {
 // define the home page route
 router.post('/', urlencodedParser, (req, res) => {
  // fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {
+    console.log(req.body)
     const estimator = covidEstimator(req.body);
     res.end(estimator);
  // });

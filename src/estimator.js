@@ -31,14 +31,14 @@ const periodInDays = (ImpactData) => {
 
 const Impact = (data) => {
 // const { timeToElapse } = data;
-  const { avgDailyIncomePopulation } = data.data.region;
-  const { avgDailyIncomeInUSD } = data.data.region;
-  const { totalHospitalBeds } = data.data;
+  const { avgDailyIncomePopulation } = data.region;
+  const { avgDailyIncomeInUSD } = data.region;
+  const { totalHospitalBeds } = data;
 
   const currentlyInfected = Math.trunc(data.reportedCases * 10);
   const currentlyInfectedSevere = Math.trunc(data.reportedCases * 50);
 
-  const infectionsByRequestedTime = Math.trunc(currentlyInfected * (2 ** returnPeriod(data.data)));
+  const infectionsByRequestedTime = Math.trunc(currentlyInfected * (2 ** returnPeriod(data)));
   const infectionsByRequestedTimeSevere = Math.trunc(currentlyInfectedSevere
      * (2 ** returnPeriod(data)));
 
@@ -95,7 +95,7 @@ const Impact = (data) => {
 
 
 const covid19ImpactEstimator = (data) => {
-  const im = Impact(data.data);
+  const im = Impact(data);
   const { estimate } = im;
   const { impact } = estimate;
   const { severeImpact } = estimate;

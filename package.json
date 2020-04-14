@@ -6,7 +6,7 @@
   "private": false,
   "scripts": {
     "lint": "eslint ./src/",
-    "start": "node ./server.js"
+    "start": "node ./router.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

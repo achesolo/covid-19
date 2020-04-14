@@ -10,8 +10,8 @@
 // //   res.json(covid19Estimator(data));
 // // });
 
- const express = require('express');
- const  app = express();
+//  const express = require('express');
+//  const  app = express();
 // const cors = require('cors');
 // const covidRouters = require('./router');
 
@@ -30,11 +30,3 @@
 //   app.use(cors());
 //   app.use('/api/v1/on-covid-19', covidRouters);
 //   module.exports = app;
-
-
-const port = 3000
-
-app.get('/', (req, res) => res.send('Hello World!'))
-
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
-module.exports = app;

@@ -18,18 +18,18 @@ app.use('logs', (req, res, next) => {
 });
 
 // define the home page route
-app.get('/', (req, res) => {
+app.get('/api/v1/on-covid-19/', (req, res) => {
  // res.end(covidEstimator(req.body));
  res.send("heelo body")
 });
 // define the about route
-app.post('/', urlencodedParser, (req, res) => {
+app.post('/api/v1/on-covid-19/', urlencodedParser, (req, res) => {
   res.end(covidEstimator(req.body));
 });
-app.post('/json', urlencodedParser, (req, res) => {
+app.post('/api/v1/on-covid-19/api/v1/on-covid-19/json', urlencodedParser, (req, res) => {
   res.json(covidEstimator(req.body));
 });
-app.post('/xml', urlencodedParser, (req, res) => {
+app.post('/api/v1/on-covid-19/xml', urlencodedParser, (req, res) => {
   req.headers('Content-Type', 'application/xml; charset=UTF-8');
   const options = { compact: true, ignoreComment: true, spaces: 4 };
   const xmlResult = convert.json2xml((covidEstimator(req.body), options));

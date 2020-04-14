@@ -1,6 +1,8 @@
 const app = require('express');
 const convert = require('xml-js');
 const covidEstimator = require('./src/estimator');
+const bodyParser = require('body-parser');
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 const router = app.Router();
 
@@ -19,13 +21,13 @@ router.get('/', (req, res) => {
   res.end(covidEstimator(req.body));
 });
 // define the about route
-router.post('/', (req, res) => {
+router.post('/', urlencodedParser, (req, res) => {
   res.end(covidEstimator(req.body));
 });
-router.post('/json', (req, res) => {
+router.post('/json', urlencodedParser, (req, res) => {
   res.json(covidEstimator(req.body));
 });
-router.post('/xml', (req, res) => {
+router.post('/xml', urlencodedParser, (req, res) => {
   req.headers('Content-Type', 'application/xml; charset=UTF-8');
   const options = { compact: true, ignoreComment: true, spaces: 4 };
   const xmlResult = convert.json2xml((covidEstimator(req.body), options));

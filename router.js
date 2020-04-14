@@ -1,8 +1,9 @@
-const app = require('express');
+const express = require('express');
 const convert = require('xml-js');
 const covidEstimator = require('./src/estimator');
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
+const app = express();
 
 const router = app.Router();
 

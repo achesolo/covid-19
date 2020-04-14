@@ -19,12 +19,10 @@ router.get('/', (req,res) => {
   res.send(req.body);
 })
 // define the home page route
-router.post('/', urlencodedParser, (req, res) => {
- // fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {
-    console.log(req.body)
- //   const estimator = covidEstimator(req.body);
-  //  res.end(estimator);
- // });
+router.post('/', function(req, res) {
+  req.header('Content-Type', 'application/json; charset=UTF-8');
+    const estimator = covidEstimator(req.body.data);   
+  res.send(estimator);
 });
 
 // router.post('/', urlencodedParser, (req, res) => {

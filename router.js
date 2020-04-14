@@ -1,4 +1,4 @@
-const express = require('express');
+const app = require('express');
 const convert = require('xml-js');
 const covidEstimator = require('./src/estimator');
 const bodyParser = require('body-parser');

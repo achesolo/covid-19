@@ -10,7 +10,7 @@ const fs = require('fs');
 const app = express();
 const bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({
+app.use(bodyParser.json({
   extended: true
 }));
 const timeLogs = [];

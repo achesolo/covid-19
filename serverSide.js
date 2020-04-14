@@ -10,7 +10,9 @@ const fs = require('fs');
 const app = express();
 const bodyParser = require('body-parser');
 
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 const timeLogs = [];
 
 app.get('/index.html', (req, res) => {
@@ -23,7 +25,7 @@ app.get('/api/v1/on-covid-19', (req, res) => {
     res.end(data);
   });
 });
-app.post('/api/v1/on-covid-19', urlencodedParser, function(req, res) {
+app.post('/api/v1/on-covid-19', function(req, res) {
   console.log('receiving data ...');
   console.log('body is ',req.body);
   res.send(req.body);

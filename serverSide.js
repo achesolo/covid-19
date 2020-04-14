@@ -26,6 +26,7 @@ app.get('/api/v1/on-covid-19', (req, res) => {
   });
 });
 app.post('/api/v1/on-covid-19', function(req, res) {
+  req.headers('Content-Type', 'application/json; charset=UTF-8');
   console.log('receiving data ...');
   console.log('body is ',req.body);
   res.send(req.body);

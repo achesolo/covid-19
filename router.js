@@ -17,10 +17,10 @@ router.use('/logs', (req, res, next) => {
 
 // define the home page route
 router.post('/', urlencodedParser, (req, res) => {
-  fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {
-    const estimator = covidEstimator(data.data);
+ // fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {
+    const estimator = covidEstimator(req.body);
     res.end(estimator);
-  });
+ // });
 });
 
 // router.post('/', urlencodedParser, (req, res) => {

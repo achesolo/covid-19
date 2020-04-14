@@ -14,7 +14,7 @@
  const  app = express();
  const cors = require('cors');
  const covidRouters = require('./router');
-
+ const bodyParser = require('body-parser');
  app.use(bodyParser.json({
     extended: true
   }));

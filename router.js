@@ -18,7 +18,7 @@ router.use('/logs', (req, res, next) => {
 // define the home page route
 router.post('/', urlencodedParser, (req, res) => {
   fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {
-    const estimator = covidEstimator(JSON.parse(data.data));
+    const estimator = covidEstimator(JSON.parse(req.body.data));
     res.end(estimator);
   });
 });
@@ -86,17 +86,17 @@ router.post('/', urlencodedParser, (req, res) => {
 // });
 
 // define the about route
-// router.post('/', urlencodedParser, (req, res) => {
-//   res.end(covidEstimator(req.body));
-// });
-// router.post('/json', urlencodedParser, (req, res) => {
-//   res.json(covidEstimator(req.body));
-// });
-// router.post('/xml', urlencodedParser, (req, res) => {
-//   req.headers('Content-Type', 'application/xml; charset=UTF-8');
-//   const options = { compact: true, ignoreComment: true, spaces: 4 };
-//   const xmlResult = convert.json2xml((covidEstimator(req.body), options));
-//   res.send(xmlResult);
-// });
+router.post('/', urlencodedParser, (req, res) => {
+  res.end(covidEstimator(req.body.data));
+});
+router.post('/json', urlencodedParser, (req, res) => {
+  res.json(covidEstimator(req.body.data));
+});
+router.post('/xml', urlencodedParser, (req, res) => {
+  req.headers('Content-Type', 'application/xml; charset=UTF-8');
+  const options = { compact: true, ignoreComment: true, spaces: 4 };
+  const xmlResult = convert.json2xml((covidEstimator(req.body.data), options));
+  res.send(xmlResult);
+});
 
 module.exports = router;

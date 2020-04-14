@@ -15,6 +15,9 @@ router.use('/logs', (req, res, next) => {
   next();
 });
 
+router.get('/', (req,res) => {
+  res.send(req.body);
+})
 // define the home page route
 router.post('/', urlencodedParser, (req, res) => {
  // fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {

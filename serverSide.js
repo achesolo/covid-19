@@ -105,3 +105,5 @@ const server = app.listen(8081, () => {
   const { port } = server.address();
    console.log('app listening on ', port);
 });
+
+export default app;

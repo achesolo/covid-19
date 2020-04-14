@@ -12,15 +12,21 @@
 
 const express = require('express');
 const  app = express();
+const cors = require('cors');
 const covidRouters = require('./router');
 
 
+// app.get('/index.html', (req, res) => {
+//     res.sendFile(`${__dirname}/` + 'index.html');
+//   });
+  
 
-
-//module.exports = app;
+//
     const server = app.listen(8081, () => {
     const host = server.address().address;
     const { port } = server.address();
      console.log('app listening at {0} on {1} ',host, port);
   });
+  app.use(cors());
   app.use('/api/v1/on-covid-19', covidRouters);
+  module.exports = app;

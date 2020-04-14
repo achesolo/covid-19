@@ -6,7 +6,7 @@
   "private": false,
   "scripts": {
     "lint": "eslint ./src/",
-    "start": "node ./src/server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.17.1",

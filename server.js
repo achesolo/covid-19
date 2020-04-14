@@ -15,7 +15,7 @@ const  app = express();
 const covidRouters = require('./router');
 
 
-app.use('/api/v1/on-covid-19', covidRouters);
+
 
 //module.exports = app;
     const server = app.listen(8081, () => {
@@ -23,3 +23,4 @@ app.use('/api/v1/on-covid-19', covidRouters);
     const { port } = server.address();
      console.log('app listening on ', port);
   });
+  app.use('/api/v1/on-covid-19', covidRouters);

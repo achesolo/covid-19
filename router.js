@@ -7,7 +7,7 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const router = app.Router();
 
 // middleware that is specific to this router
-router.use('/api/v1/on-covid-19/logs', (req, res, next) => {
+router.use('logs', (req, res, next) => {
   const startTime = new Date().getTime();
   const reqTime = new Date().getTime() - startTime;
 
@@ -18,7 +18,8 @@ router.use('/api/v1/on-covid-19/logs', (req, res, next) => {
 
 // define the home page route
 router.get('/', (req, res) => {
-  res.end(covidEstimator(req.body));
+ // res.end(covidEstimator(req.body));
+ res.send("heelo body")
 });
 // define the about route
 router.post('/', urlencodedParser, (req, res) => {

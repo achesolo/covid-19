@@ -5,10 +5,10 @@ const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const app = express();
 
-const router = app.Router();
+//const router = app.Router();
 
 // middleware that is specific to this router
-router.use('logs', (req, res, next) => {
+app.use('logs', (req, res, next) => {
   const startTime = new Date().getTime();
   const reqTime = new Date().getTime() - startTime;
 
@@ -18,18 +18,18 @@ router.use('logs', (req, res, next) => {
 });
 
 // define the home page route
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
  // res.end(covidEstimator(req.body));
  res.send("heelo body")
 });
 // define the about route
-router.post('/', urlencodedParser, (req, res) => {
+app.post('/', urlencodedParser, (req, res) => {
   res.end(covidEstimator(req.body));
 });
-router.post('/json', urlencodedParser, (req, res) => {
+app.post('/json', urlencodedParser, (req, res) => {
   res.json(covidEstimator(req.body));
 });
-router.post('/xml', urlencodedParser, (req, res) => {
+app.post('/xml', urlencodedParser, (req, res) => {
   req.headers('Content-Type', 'application/xml; charset=UTF-8');
   const options = { compact: true, ignoreComment: true, spaces: 4 };
   const xmlResult = convert.json2xml((covidEstimator(req.body), options));

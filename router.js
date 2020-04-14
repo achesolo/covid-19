@@ -1,56 +1,35 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable linebreak-style */
-const covid19Estimator = require('./src/estimator');
+const app = require('express');
 const convert = require('xml-js');
-const request = require('request');
-const express = require('express');
-var router = express.Router();
-const fs = require('fs');
-
-const app = express();
+const covidEstimator = require('./src/estimator');
 const bodyParser = require('body-parser');
+const fs = require('fs');
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+const router = app.Router();
+// middleware that is specific to this router
+router.use('/logs', (req, res, next) => {
+  const startTime = new Date().getTime();
+  const reqTime = new Date().getTime() - startTime;
 
-app.use(bodyParser.json({
-  extended: true
-}));
-const timeLogs = [];
-
-app.get('/index.html', (req, res) => {
-  res.sendFile(`${__dirname}/` + 'index.html');
+  req.headers('Content-Type', 'text/plain');
+  res.send((`${Date.now()}\t\t${req.path}\t\t ${res.sendStatus(200)}\t\t${reqTime}ms\n`));
+  next();
 });
 
-app.get('/api/v1/on-covid-19', (req, res) => {
-  fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {
-    console.log(data);
-    res.end(data);
-  });
-});
-app.post('/api/v1/on-covid-19', function(req, res) {
+router.get('/', (req,res) => {
+  res.send(req.body);
+})
+// define the home page route
+router.post('/', function(req, res) {
   req.header('Content-Type', 'application/json; charset=UTF-8');
-  console.log('receiving data ...');
-  console.log('body is ',req.body);
-    const estimator = covid19Estimator(req.body.data);
-   
+    const estimator = covidEstimator(req.body.data);   
   res.send(estimator);
 });
-//
 
-// app.post('/api/v1/on-covid-19', urlencodedParser, (req, res) => {
-//   const response = {
-//     population: req.body.population,
-//     timeToElapse: req.body.time_to_elapse,
-//     reportedCases: req.body.reported_cases,
-//     totalHospitalBeds: req.body.hospital_beds,
-//     periodType: req.body.period_type
-//   };
+// router.post('/', urlencodedParser, (req, res) => {
+
 //   fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {
 //     data = JSON.parse(data);
-//     data.data.population = Math.trunc(response.population);
-//     data.data.timeToElapse = Math.trunc(response.timeToElapse);
-//     data.data.reportedCases = Math.trunc(response.reportedCases);
-//     data.data.totalHospitalBeds = Math.trunc(response.totalHospitalBeds);
-//     data.data.periodType = response.periodType;
-//     const estimator = covid19Estimator(data.data);
+//     const estimator = covidEstimator(data.data);
     
 //     res.end(JSON.stringify(estimator));
 //     const startTime = new Date().getTime();
@@ -64,8 +43,8 @@ app.post('/api/v1/on-covid-19', function(req, res) {
 //       timeLogs.push(covidLogs);
 //     });
 
-//     app.get('/api/v1/on-covid-19/json', (req, res) => {
-//       res.end(JSON.stringify(estimator));
+//     router.post('/json', (req, res) => {
+//       res.json(JSON.stringify(estimator));
 //       // const startTime = new Date().getTime();
 //       request.get('/api/v1/on-covid-19/json', (err, response) => {
 //         reqTime = new Date().getTime() - startTime;
@@ -78,7 +57,7 @@ app.post('/api/v1/on-covid-19', function(req, res) {
 //       });
 //     });
 
-//     router.get('/api/v1/on-covid-19/xml', (req, res) => {
+//     router.post('/xml', (req, res) => {
 //       const options = { compact: true, ignoreComment: true, spaces: 4 };
 //       const result = convert.json2xml(estimator, options);
 //       res.end(result);
@@ -95,7 +74,7 @@ app.post('/api/v1/on-covid-19', function(req, res) {
 //       });
 //     });
 
-//     router.get('/api/v1/on-covid-19/logs', (req, res, next) => {
+//     router.post('/logs', (req, res, next) => {
 //       logstimeStamp = [];
 //       logsreqPath = [];
 //       logstimediff = [];
@@ -108,11 +87,16 @@ app.post('/api/v1/on-covid-19', function(req, res) {
 //   });
 // });
 
+// define the about route
 
-const server = app.listen(process.env.PORT, () => {
-  const host = server.address().address;
-  const { port } = server.address();
-   console.log('app listening on ', port);
+router.post('/json', urlencodedParser, (req, res) => {
+  res.json(covidEstimator(req.body.data));
+});
+router.post('/xml', (req, res) => {
+  req.headers('Content-Type', 'text/xml; charset=UTF-8');
+  const options = { compact: true, ignoreComment: true, spaces: 4 };
+  const xmlResult = convert.json2xml((covidEstimator(req.body.data), options));
+  res.send(xmlResult);
 });
 
-module.exports = app;
+module.exports = router;

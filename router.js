@@ -92,8 +92,8 @@ router.post('/', function(req, res) {
 router.post('/json', urlencodedParser, (req, res) => {
   res.json(covidEstimator(req.body.data));
 });
-router.post('/xml', urlencodedParser, (req, res) => {
-  req.headers('Content-Type', 'application/xml; charset=UTF-8');
+router.post('/xml', (req, res) => {
+  req.headers('Content-Type', 'text/xml; charset=UTF-8');
   const options = { compact: true, ignoreComment: true, spaces: 4 };
   const xmlResult = convert.json2xml((covidEstimator(req.body.data), options));
   res.send(xmlResult);

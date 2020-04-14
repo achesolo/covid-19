@@ -36,4 +36,4 @@ app.post('/xml', urlencodedParser, (req, res) => {
   res.send(xmlResult);
 });
 
-module.exports = router;
+module.exports = app;

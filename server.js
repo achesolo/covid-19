@@ -15,7 +15,9 @@
  const cors = require('cors');
  const covidRouters = require('./router');
 
-
+ app.use(bodyParser.json({
+    extended: true
+  }));
 // // app.get('/index.html', (req, res) => {
 // //     res.sendFile(`${__dirname}/` + 'index.html');
 // //   });

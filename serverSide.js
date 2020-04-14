@@ -42,7 +42,7 @@ app.post('/api/v1/on-covid-19', urlencodedParser, (req, res) => {
     data.data.totalHospitalBeds = Math.trunc(response.totalHospitalBeds);
     data.data.periodType = response.periodType;
     const estimator = covid19Estimator(data.data);
-
+    
     res.end(JSON.stringify(estimator));
     const startTime = new Date().getTime();
     request.get('/api/v1/on-covid-19', (err, response) => {

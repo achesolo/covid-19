@@ -16,74 +16,74 @@ router.use('/logs', (req, res, next) => {
 });
 
 // define the home page route
-router.get('/', (req, res) => {
-  fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {
-    console.log(data);
-    res.end(data);
-  });
-});
-
 router.post('/', urlencodedParser, (req, res) => {
-
   fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {
-    data = JSON.parse(data);
-    const estimator = covidEstimator(data.data);
-    
-    res.end(JSON.stringify(estimator));
-    const startTime = new Date().getTime();
-    request.get('/api/v1/on-covid-19', (err, response) => {
-      const reqTime = new Date().getTime() - startTime;
-      const covidLogs = JSON.stringify({
-        timeStamp: Date.now(),
-        requestpath: 'on-covid-19',
-        timediff: `done in ${reqTime} seconds`
-      });
-      timeLogs.push(covidLogs);
-    });
-
-    router.get('/json', (req, res) => {
-      res.json(JSON.stringify(estimator));
-      // const startTime = new Date().getTime();
-      request.get('/api/v1/on-covid-19/json', (err, response) => {
-        reqTime = new Date().getTime() - startTime;
-        jsonLogs = JSON.stringify({
-          timeStamp: Date.now(),
-          requestpath: 'on-covid-19/json',
-          timediff: `done in ${reqTime} seconds`
-        });
-        timeLogs.push(jsonLogs);
-      });
-    });
-
-    router.get('/xml', (req, res) => {
-      const options = { compact: true, ignoreComment: true, spaces: 4 };
-      const result = convert.json2xml(estimator, options);
-      res.end(result);
-
-      const start_time = new Date().getTime();
-      request.get('/api/v1/on-covid-19/xml', (err, response) => {
-        reqTime = new Date().getTime() - start_time;
-        xmlLogs = JSON.stringify({
-          timeStamp: Date.now(),
-          requestpath: 'on-covid-19/xml',
-          timediff: `done in ${reqTime} seconds`
-        });
-        timeLogs.push(xmlLogs);
-      });
-    });
-
-    router.get('/logs', (req, res, next) => {
-      logstimeStamp = [];
-      logsreqPath = [];
-      logstimediff = [];
-
-      for (let i = 0; i < timeLogs.length; i++) {
-        jsonData = JSON.parse(timeLogs[i]);
-        res.end(`${jsonData.timeStamp}\t\t${jsonData.requestpath}\t\t${jsonData.timediff}\n`);
-      }
-    });
+    const estimator = covidEstimator(JSON.parse(data.data));
+    res.end(estimator);
   });
 });
+
+// router.post('/', urlencodedParser, (req, res) => {
+
+//   fs.readFile(`${__dirname}/` + './src/inputData.json', 'utf8', (err, data) => {
+//     data = JSON.parse(data);
+//     const estimator = covidEstimator(data.data);
+    
+//     res.end(JSON.stringify(estimator));
+//     const startTime = new Date().getTime();
+//     request.get('/api/v1/on-covid-19', (err, response) => {
+//       const reqTime = new Date().getTime() - startTime;
+//       const covidLogs = JSON.stringify({
+//         timeStamp: Date.now(),
+//         requestpath: 'on-covid-19',
+//         timediff: `done in ${reqTime} seconds`
+//       });
+//       timeLogs.push(covidLogs);
+//     });
+
+//     router.post('/json', (req, res) => {
+//       res.json(JSON.stringify(estimator));
+//       // const startTime = new Date().getTime();
+//       request.get('/api/v1/on-covid-19/json', (err, response) => {
+//         reqTime = new Date().getTime() - startTime;
+//         jsonLogs = JSON.stringify({
+//           timeStamp: Date.now(),
+//           requestpath: 'on-covid-19/json',
+//           timediff: `done in ${reqTime} seconds`
+//         });
+//         timeLogs.push(jsonLogs);
+//       });
+//     });
+
+//     router.post('/xml', (req, res) => {
+//       const options = { compact: true, ignoreComment: true, spaces: 4 };
+//       const result = convert.json2xml(estimator, options);
+//       res.end(result);
+
+//       const start_time = new Date().getTime();
+//       request.get('/api/v1/on-covid-19/xml', (err, response) => {
+//         reqTime = new Date().getTime() - start_time;
+//         xmlLogs = JSON.stringify({
+//           timeStamp: Date.now(),
+//           requestpath: 'on-covid-19/xml',
+//           timediff: `done in ${reqTime} seconds`
+//         });
+//         timeLogs.push(xmlLogs);
+//       });
+//     });
+
+//     router.post('/logs', (req, res, next) => {
+//       logstimeStamp = [];
+//       logsreqPath = [];
+//       logstimediff = [];
+
+//       for (let i = 0; i < timeLogs.length; i++) {
+//         jsonData = JSON.parse(timeLogs[i]);
+//         res.end(`${jsonData.timeStamp}\t\t${jsonData.requestpath}\t\t${jsonData.timediff}\n`);
+//       }
+//     });
+//   });
+// });
 
 // define the about route
 // router.post('/', urlencodedParser, (req, res) => {
